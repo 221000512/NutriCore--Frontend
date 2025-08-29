@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 export const Context = createContext();
 
 // Make sure VITE_API_URL is set in Vercel or fallback to local
-const API = import.meta.env.VITE_API_URL || "http://localhost:4000";
+const API = import.meta.env.VITE_API_URL || "https://nutricore-backend.onrender.com";
 
 const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
@@ -133,6 +133,6 @@ const ContextProvider = ({ children }) => {
 
 ContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
-};
+};npm
 
-export default ContextProvider;
+export default Context;
