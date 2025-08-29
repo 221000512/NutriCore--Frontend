@@ -37,7 +37,10 @@ const Navbar = () => {
         ) : null}
 
         {!user ? (
-          <Link to="/login" className="hover:text-green-600">Login</Link>
+          <>
+            <Link to="/login" className="hover:text-green-600">Login</Link>
+            <Link to="/adminLogin" className="hover:text-green-600">Admin Login</Link>
+          </>
         ) : (
           <button
             onClick={handleLogout}
