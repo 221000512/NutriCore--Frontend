@@ -3,7 +3,9 @@ import { createContext, useEffect, useState, useCallback } from "react";
 import { toast } from "react-toastify";
 
 export const Context = createContext();
-const API = import.meta.env.VITE_API_URL; 
+
+// Make sure VITE_API_URL is set in Vercel or fallback to local
+const API = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
@@ -12,7 +14,7 @@ const ContextProvider = ({ children }) => {
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
 
-  // Persist user on change
+  // Persist user in localStorage
   useEffect(() => {
     if (user) localStorage.setItem("user", JSON.stringify(user));
     else localStorage.removeItem("user");
@@ -23,12 +25,17 @@ const ContextProvider = ({ children }) => {
   // -------------------
   const registerUser = async (name, email, password) => {
     try {
+      console.log("Register request:", { name, email, password }); // Debug
+
       const res = await fetch(`${API}/api/user/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
       });
+
       const data = await res.json();
+      console.log("Register response:", data);
+
       if (data.success) {
         setUser(data.user);
         setToken(data.token);
@@ -40,6 +47,7 @@ const ContextProvider = ({ children }) => {
         return { success: false };
       }
     } catch (err) {
+      console.error("Register error:", err);
       toast.error("Registration failed");
       return { success: false };
     }
@@ -47,12 +55,17 @@ const ContextProvider = ({ children }) => {
 
   const loginUser = async (email, password) => {
     try {
+      console.log("Login request:", { email, password }); // Debug
+
       const res = await fetch(`${API}/api/user/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
+
       const data = await res.json();
+      console.log("Login response:", data);
+
       if (data.success) {
         setUser(data.user);
         setToken(data.token);
@@ -64,6 +77,7 @@ const ContextProvider = ({ children }) => {
         return { success: false };
       }
     } catch (err) {
+      console.error("Login error:", err);
       toast.error("Login failed");
       return { success: false };
     }

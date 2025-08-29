@@ -26,7 +26,7 @@ const AdminLogin = () => {
     <div className="min-h-screen flex items-center justify-center bg-slate-100">
        <form
       onSubmit={handleSubmit}
-      className=" flex flex-col gap-3 p-5 max-w-sm mx-auto mt-10 bg-gray-900 text-white rounded-xl"
+      className=" flex flex-col gap-3 p-10 max-w-sm mx-auto mt-5 bg-gray-900 text-white rounded-xl"
     >
       <h2 className="text-2xl font-bold text-center">Admin Login</h2>
       <input
@@ -49,7 +49,6 @@ const AdminLogin = () => {
         Login
       </button>
     </form>
-
     </div>
    
   );
