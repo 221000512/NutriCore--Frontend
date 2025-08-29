@@ -3,31 +3,27 @@ import { createContext, useEffect, useState, useCallback } from "react";
 import { toast } from "react-toastify";
 
 export const Context = createContext();
-const API = import.meta.env.VITE_API_URL;
+const API = import.meta.env.VITE_API_URL; 
 
 const ContextProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
 
-  // Persist user on refresh
-  // Persist user whenever it changes
-useEffect(() => {
-  if (user) {
-    localStorage.setItem("user", JSON.stringify(user));
-  } else {
-    localStorage.removeItem("user");
-  }
-}, [user]);
+  // Persist user on change
+  useEffect(() => {
+    if (user) localStorage.setItem("user", JSON.stringify(user));
+    else localStorage.removeItem("user");
+  }, [user]);
 
   // -------------------
   // Auth functions
   // -------------------
   const registerUser = async (name, email, password) => {
     try {
-      const res = await fetch(`${API}/user/register`, {
+      const res = await fetch(`${API}/api/user/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -37,11 +33,10 @@ useEffect(() => {
         setUser(data.user);
         setToken(data.token);
         localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
         toast.success("Registration successful");
         return { success: true };
       } else {
-        toast.error(data.message);
+        toast.error(data.message || "Registration failed");
         return { success: false };
       }
     } catch (err) {
@@ -52,7 +47,7 @@ useEffect(() => {
 
   const loginUser = async (email, password) => {
     try {
-      const res = await fetch(`${API}/user/login`, {
+      const res = await fetch(`${API}/api/user/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -62,11 +57,10 @@ useEffect(() => {
         setUser(data.user);
         setToken(data.token);
         localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
         toast.success("Login successful");
         return { success: true };
       } else {
-        toast.error(data.message);
+        toast.error(data.message || "Login failed");
         return { success: false };
       }
     } catch (err) {
@@ -88,7 +82,7 @@ useEffect(() => {
   // -------------------
   const fetchProducts = useCallback(async () => {
     try {
-      const res = await fetch(`${API}/product/list`);
+      const res = await fetch(`${API}/api/product/list`);
       const data = await res.json();
       if (data.success) setProducts(data.products || []);
       else setProducts([]);
