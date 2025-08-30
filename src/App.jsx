@@ -14,7 +14,7 @@ import MythBuster from "./Pages/MythBuster";
 
 import LabelAnalyzer from "./Pages/labelAnalyzer";
 import CalorieCalculator from "./Pages/CalorieCalculator";
-
+import AdminLogin from "./Pages/AdminLogin";
 
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
