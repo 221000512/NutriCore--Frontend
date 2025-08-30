@@ -92,7 +92,7 @@ const ContextProvider = ({ children }) => {
   // -------------------
   const fetchProducts = useCallback(async () => {
     try {
-      const res = await fetch(`${API}/product/list`);
+      const res = await fetch(`${API}/api/product/list`);
       const data = await res.json();
 
       if (data?.success) setProducts(data.products || []);
