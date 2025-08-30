@@ -20,7 +20,7 @@ import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import SearchBar from "./Components/SearchBar";
 import ProtectedRoute from "./Components/ProtectedRoute";
-import AdminProtectedRoute from "./Components/AdminProtectedRoute"; // <- import from context
+import AdminProtectedRoute from "./Components/ProtectedRoute"; // <- import from context
 
 import UserDashBoard from "./Pages/UserDashBoard";
 import AdminDashBoard from "./Pages/AdminDashBoard";
