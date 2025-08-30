@@ -26,7 +26,7 @@ const AdminDashboard = () => {
   });
 
   useEffect(() => {
-    if (!token) navigate("/admin/login");
+    if (!token) navigate("/api/admin/login");
   }, [token, navigate]);
 
   const fetchProducts = async () => {
