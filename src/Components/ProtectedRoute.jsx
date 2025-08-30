@@ -1,15 +1,16 @@
 // src/Components/AdminProtectedRoute.jsx
-import React from "react";
+import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
+import { Context } from "../Context/Context";
 
 const AdminProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem("adminToken"); // check admin token
+  const { admin } = useContext(Context);
 
-  if (!token) {
-    return <Navigate to="/admin/login" replace />; // redirect to login if not authenticated
+  if (!admin || admin.role !== "admin") {
+    return <Navigate to="/admin/login" replace />;
   }
 
-  return children; // token exists → allow access
+  return children;
 };
 
 export default AdminProtectedRoute;
