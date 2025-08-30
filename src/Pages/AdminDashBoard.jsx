@@ -166,7 +166,7 @@ const AdminDashboard = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("adminToken");
-    navigate("/admin/login");
+    navigate("/api/admin/login");
   };
 
   // Helper to update labelData fields dynamically
