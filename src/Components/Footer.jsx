@@ -1,6 +1,8 @@
 import { assets } from '../assets/assets';
 import { Link } from 'react-router-dom';
 
+
+
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({
@@ -9,6 +11,8 @@ const Footer = () => {
       behavior: 'smooth',
     });
   };
+    
+
 
   return (
     <footer className="pt-10 px-4 md:px-20 lg:px-32 bg-gray-900 w-full text-center">
@@ -39,6 +43,8 @@ const Footer = () => {
         </a>
       </div>
 
+      
+
       {/* Contact & Quick Links */}
       <div className="mb-8 flex flex-col md:flex-row justify-center gap-12">
         <div>
@@ -47,7 +53,7 @@ const Footer = () => {
             <li>+88017XX-XXXXXX</li>
             <li>nutriCore@gmail.com</li>
             <li>
-              <Link to="/admin" className="hover:text-green-600">
+              <Link to="/admin/login" className="hover:text-green-600">
                 Admin Login
               </Link>
             </li>
