@@ -1,16 +1,23 @@
-// src/Components/AdminProtectedRoute.jsx
-import React, { useContext } from "react";
+// src/Components/ProtectedRoute.jsx
+import React from "react";
 import { Navigate } from "react-router-dom";
-import { Context } from "../Context/Context";
 
-const AdminProtectedRoute = ({ children }) => {
-  const { admin } = useContext(Context);
+const ProtectedRoute = ({ children, allowedRoles = ["user", "admin"] }) => {
+  // Get tokens from localStorage
+  const userToken = localStorage.getItem("token");
+  const adminToken = localStorage.getItem("adminToken");
 
-  if (!admin || admin.role !== "admin") {
-    return <Navigate to="/admin/login" replace />;
+  // Determine role
+  let role = null;
+  if (adminToken) role = "admin";
+  else if (userToken) role = "user";
+
+  // If no token or role not allowed, redirect
+  if (!role || !allowedRoles.includes(role)) {
+    return <Navigate to="/login" replace />;
   }
 
   return children;
 };
 
-export default AdminProtectedRoute;
+export default ProtectedRoute;

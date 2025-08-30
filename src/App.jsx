@@ -20,12 +20,7 @@ import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import SearchBar from "./Components/SearchBar";
 import ProtectedRoute from "./Components/ProtectedRoute";
-
-const AdminProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem("adminToken");
-  if (!token) return <AdminLogin />;
-  return children;
-};
+import AdminProtectedRoute from "./Components/AdminProtectedRoute"; // <- import from context
 
 import UserDashBoard from "./Pages/UserDashBoard";
 import AdminDashBoard from "./Pages/AdminDashBoard";
