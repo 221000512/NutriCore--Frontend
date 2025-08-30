@@ -14,7 +14,7 @@ const AdminLogin = () => {
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/admin/login`, { email, password });
       if (res.data.success) {
         localStorage.setItem("adminToken", res.data.token);
-        navigate("/admin"); // redirect to dashboard after login
+        navigate("/adminDashBoard"); // redirect to dashboard after login
       }
     } catch (err) {
       console.error(err);
