@@ -53,7 +53,7 @@ const Footer = () => {
             <li>+88017XX-XXXXXX</li>
             <li>nutriCore@gmail.com</li>
             <li>
-              <Link to="/api/admin/login" className="hover:text-green-600">
+              <Link to="/admin/login" className="hover:text-green-600">
                 Admin Login
               </Link>
             </li>
